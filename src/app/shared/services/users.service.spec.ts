@@ -37,16 +37,16 @@ describe('UsersService', () => {
       const user: UserInteface = { id: '3', name: 'Dime' };
       usersService.addUser(user);
 
-      expect(usersService.users).toEqual([{ id: '3', name: 'Dime' }]);
+      expect(usersService.users$.getValue()).toEqual([{ id: '3', name: 'Dime' }]);
     })
   });
 
   describe('removeUser', () => {
     it('should remove a user', () => {
-      usersService.users = [{ id: '3', name: 'Dime' }];
+      usersService.users$.next([{ id: '3', name: 'Dime' }]);
       usersService.removeUser('3');
 
-      expect(usersService.users).toEqual([]);
+      expect(usersService.users$.getValue()).toEqual([]);
     })
   });
 
@@ -59,11 +59,11 @@ describe('UsersService', () => {
     it('should get usernames', () => {
       jest.spyOn(utilsService, 'pluck');
 
-      usersService.users = [{ id: '3', name: 'Dime' }];
+      usersService.users$.next([{ id: '3', name: 'Dime' }]);
       usersService.getUsernames();
 
       expect(utilsService.pluck).toHaveBeenCalledWith(
-        usersService.users,
+        usersService.users$.getValue(),
         'name'
       );
     })
