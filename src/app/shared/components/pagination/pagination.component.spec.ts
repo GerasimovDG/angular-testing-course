@@ -7,11 +7,18 @@ import { first } from 'rxjs';
 describe('PaginationComponent', () => {
   let component: PaginationComponent;
   let fixture: ComponentFixture<PaginationComponent>;
+  const mockUtilsService = {
+    range: () => [1,2,3,4,5],
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PaginationComponent],
-      providers: [UtilsService],
+      // providers: [UtilsService],
+      providers: [{
+        provide: UtilsService,
+        useValue: mockUtilsService,
+      }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(PaginationComponent);
