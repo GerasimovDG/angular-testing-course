@@ -1,0 +1,14 @@
+<ul class="pagination">
+  @for (page of pages; track page) {
+    <li
+      class="page-item"
+      data-testid="page-container"
+      [ngClass]="{ active: currentPage === page }"
+      (click)="selectPage(page)"
+    >
+      <span class="page-link">
+        {{ page }}
+      </span>
+    </li>
+  }
+</ul>
