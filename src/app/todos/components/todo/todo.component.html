@@ -11,15 +11,15 @@
       (change)="toggleTodo()"
     />
     <label data-testid="label" (dblclick)="setTodoInEditMode()">{{
-      todo.text
-    }}</label>
+        todo.text
+      }}</label>
     <button
       data-testid="destroy"
       class="destroy"
       (click)="removeTodo()"
     ></button>
   </div>
-  <ng-container *ngIf="isEditing">
+  @if (isEditing) {
     <input
       data-testid="edit"
       class="edit"
@@ -28,5 +28,5 @@
       (keyup)="changeText($event)"
       (keyup.enter)="changeTodo()"
     />
-  </ng-container>
+  }
 </li>
