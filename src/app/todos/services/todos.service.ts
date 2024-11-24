@@ -37,7 +37,7 @@ export class TodosService {
 
   changeTodo(id: string, text: string): void {
     this.httpClient
-      .patch<TodoInterface>(`${this.apiBaseUrl}/${id}`, { text })
+      .patch<TodoInterface>(`${this.apiBaseUrl}/${id}`, {text})
       .subscribe((updatedTodo) => {
         this.todosSig.update((todos) =>
           todos.map((todo) => (todo.id === id ? updatedTodo : todo))
@@ -79,7 +79,7 @@ export class TodosService {
     });
     forkJoin(requests$).subscribe(() => {
       this.todosSig.update((todos) =>
-        todos.map((todo) => ({ ...todo, isCompleted }))
+        todos.map((todo) => ({...todo, isCompleted}))
       );
     });
   }
