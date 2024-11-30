@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { TodosService } from '../../services/todos.service';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
@@ -6,6 +6,7 @@ import { TodoComponent } from './todo.component';
 import { TodoInterface } from '../../types/todo.interface';
 import { By } from '@angular/platform-browser';
 import { first } from 'rxjs';
+import { SimpleChange } from '@angular/core';
 
 describe('TodoComponent', () => {
   let component: TodoComponent;
@@ -102,4 +103,16 @@ describe('TodoComponent', () => {
     expect(todosService.changeTodo).toHaveBeenCalledWith(TODO.id, 'foo');
     expect(editingId).toEqual(null);
   });
+
+  it('should focus after editing activation', fakeAsync(() => {
+    component.isEditing = true;
+    component.ngOnChanges({
+      isEditing: new SimpleChange(false, true, false),
+    });
+
+    fixture.detectChanges();
+    tick(0);
+    const editElement = fixture.debugElement.query(By.css('[data-testid="edit"]:focus'));
+    expect(editElement).toBeTruthy();
+  }));
 });

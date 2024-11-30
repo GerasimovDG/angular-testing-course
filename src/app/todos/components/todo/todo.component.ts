@@ -34,8 +34,8 @@ export class TodoComponent implements OnInit, OnChanges {
     this.editingText = this.todo.text;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['isEditing'].currentValue) {
+  ngOnChanges({ isEditing }: SimpleChanges): void {
+    if (isEditing?.currentValue) {
       setTimeout(() => {
         this.textInput?.nativeElement.focus();
       }, 0);
