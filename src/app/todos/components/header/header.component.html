@@ -6,6 +6,7 @@
     autoFocus
     [value]="text"
     data-testid="newTodoInput"
+    data-cy="newTodoInput"
     (keyup)="changeText($event)"
     (keyup.enter)="addTodo()"
   />

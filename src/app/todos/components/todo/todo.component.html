@@ -7,14 +7,16 @@
       class="toggle"
       data-testid="toggle"
       type="checkbox"
+      data-cy="todoCheckbox"
       [checked]="todo.isCompleted"
       (change)="toggleTodo()"
     />
-    <label data-testid="label" (dblclick)="setTodoInEditMode()">{{
+    <label data-testid="label" data-cy="todoLabel" (dblclick)="setTodoInEditMode()">{{
         todo.text
       }}</label>
     <button
       data-testid="destroy"
+      data-cy="destroy"
       class="destroy"
       (click)="removeTodo()"
     ></button>
@@ -22,6 +24,7 @@
   @if (isEditing) {
     <input
       data-testid="edit"
+      data-cy="edit"
       class="edit"
       #textInput
       [value]="editingText"
